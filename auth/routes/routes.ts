@@ -33,6 +33,7 @@ Routes.post("/login", async (req, res, next) => {
 	};
 
 	// Valida datos
+	//console.log(req.body.usuario , req.body.password);
 	if (!req.body.usuario || !req.body.password) {
 		return next(403);
 	}
@@ -51,6 +52,7 @@ Routes.post("/login", async (req, res, next) => {
 						user.password = sha1Hash(req.body.password);
 						return login(user);
 					} else {
+						console.log("Ingresó ldap}");
 						return next(403);
 					}
 				case "password":
@@ -64,8 +66,10 @@ Routes.post("/login", async (req, res, next) => {
 					break;
 			}
 		}
+		console.log("Ingresó no ldap}");
 		return next(403);
 	} catch (error) {
+		console.log(error);
 		return next(403);
 	}
 });

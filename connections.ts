@@ -112,6 +112,7 @@ export class Connections {
     }
 
     private static configEvents(name: string, connection: mongoose.Connection) {
+       //console.log("hola mongo");
         const connectionLog = debug("mongoose:" + name);
         connection.on("connecting", () => connectionLog("connecting ..."));
         connection.on("error", (error) => connectionLog(`error: ${error}`));

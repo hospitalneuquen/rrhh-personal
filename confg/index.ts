@@ -37,18 +37,19 @@ export default {
         },
     },
     database: {
-        mongo: env('MONGO_HOST', 'mongodb://localhost:27017/test'),
+        //mongo: env('MONGO_HOST', 'mongodb://devUser:devGeodas23@mongolito.hospitalneuquen.org.ar:27028/rrhh'),
+       mongo: env('MONGO_HOST', 'mongodb://localhost:27017/rrhh'),
         sqlserverAnviz: {
-            server: env('SQLSERVER_SERVER', 'localhost'),
-            database: env('SQLSERVER_DB', 'test'),
-            user: env('SQLSERVER_USER', 'test'),
-            password: env('SQLSERVER_PASS', 'test'),
+            server: env('SQLSERVER_SERVER', '172.16.1.79'),
+            database: env('SQLSERVER_DB', 'hospital'),
+            user: env('SQLSERVER_USER', 'mbenicio'),
+            password: env('SQLSERVER_PASS', '3369046'),
         },
         sqlserverHospital: {
-            server: env('HOSPITAL_SERVER', 'localhost'),
-            database: env('HOSPITAL_DB', 'test'),
-            user: env('HOSPITAL_USER', 'test'),
-            password: env('HOSPITAL_PASS', 'test'),
+            server: env('HOSPITAL_SERVER', '172.16.1.79'),
+            database: env('SQLSERVER_DB', 'hospital'),
+            user: env('SQLSERVER_USER', 'mbenicio'),
+            password: env('SQLSERVER_PASS', '33690456'),
         },
 
     },
