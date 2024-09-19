@@ -66,7 +66,6 @@ Routes.post("/login", async (req, res, next) => {
 					break;
 			}
 		}
-		console.log("Ingresó no ldap}");
 		return next(403);
 	} catch (error) {
 		console.log(error);
