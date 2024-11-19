@@ -85,6 +85,7 @@ export const opcionesAgrupamiento = [
 
 export const opcionesVisualizacion = [
 	// Datos Personales
+	{ id: "cuil", nombre: "Cuil" },
 	{ id: "estadoCivil", nombre: "Estado Civil" },
 	{ id: "nacionalidad.nombre", nombre: "Nacionalidad" },
 	{ id: "sexo", nombre: "Sexo" },
