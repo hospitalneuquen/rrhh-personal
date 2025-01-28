@@ -25,7 +25,8 @@ class FeriadoController extends BaseController {
             // recupera la info en un periodo de un anio hacia atras y adelante
             const thisYear = (new Date()).getFullYear();
             const fechaHasta = new Date((thisYear + 1) + "-12-31");
-            const fechaDesde = new Date((thisYear - 1) + "-01-01") ;
+            //Se cambia para que muestre desde el primer feriado registrado.
+            const fechaDesde = new Date((2000) + "-01-01") ;
             const pipeline = [
                 { $match: { fecha: { $gte:fechaDesde, $lte:fechaHasta }}},
                 { $project:
