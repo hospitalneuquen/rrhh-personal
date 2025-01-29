@@ -31,9 +31,9 @@ export default {
     auth: {
         method: env('AUTH', ''),
         ldap: {
-            host: env('LADP_HOST', 'localhost'),
+            host: env('LADP_HOST', 'http://ldap.neuquen.gov.ar/'),
             port: env('LADP_PORT', 389),
-            ou: env('LADP_OU', ''),
+            ou: env('LADP_OU', 'ou=People,o=integrabilidad,o=neuquen'),
         },
     },
     database: {
@@ -63,8 +63,8 @@ export const auth = {
 
 // Hosts
 export const hosts = {
-    // ldap: env("LDAP_HOST", "ldap.neuquen.gov.ar"),
-    ldap: env('LDAP_HOST', '172.16.1.74'),
+    ldap: env("LDAP_HOST", "ldap.neuquen.gov.ar"),
+    //ldap: env('LDAP_HOST', '172.16.1.74'),
 };
 
 // Puerto de LDAP
