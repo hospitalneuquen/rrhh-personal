@@ -65,6 +65,9 @@ export class DocumentoAusenciasPorAgente extends DocumentoPDF {
             articulosIds = articulosIds.$in? articulosIds.$in: [articulosIds];
             filterArticulos = { $in : articulosIds }
         }
+        else {
+            articulosIds = [];
+        }
         // Preparamos las opciones de filtrado sobre el agente. Removemos filtros no requeridos
         let filterCondition = utils.cleanFilters(query.filter);
         
@@ -110,12 +113,13 @@ export class DocumentoAusenciasPorAgente extends DocumentoPDF {
         ]
     
         let gruposAgentes = await Agente.aggregate(pipeline);
-    
-    
+        let articulos = await Articulo.find((articulosIds.length)?{"_id": { $in: articulosIds }}:{}).sort({ codigo: 1});
         return { 
             gruposAgente: gruposAgentes,
             srcImgLogo: this.headerLogo,
+            articulos: articulos,
             filtros: await this.encabezadoFiltrosAplicados()
+            
             }
     }
 
