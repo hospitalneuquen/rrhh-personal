@@ -47,7 +47,7 @@ export class DocumentoAusenciasTotalesPorArticulo extends DocumentoPDF {
         }
         else {
             articulosIds = [];
-        }
+        }    
 
         // Preparamos las opciones de filtrado sobre el agente. Removemos filtros no requeridos
         let filterCondition = utils.cleanFilters(query.filter);
@@ -100,12 +100,68 @@ export class DocumentoAusenciasTotalesPorArticulo extends DocumentoPDF {
         let gruposAgentes = await Agente.aggregate(pipeline);
 
         let articulos = await Articulo.find((articulosIds.length)?{"_id": { $in: articulosIds }}:{}).sort({ codigo: 1});
+    
+        //Nuevo filtro para enviar solo los artículos con ausencias > 0
+        let articulos2 =[];
+        for (const grupo of gruposAgentes){
+                for (const articulo of articulos) {
+                    for (const agente of grupo.agentes) {              
+                        if (agente.ausentismo.length) {                            
+                            let articuloMap = mapTotalArticulo(articulo, grupo.agentes);
+                            for (const articulo of articuloMap) {                                
+                                if( articulo!==undefined && articulo.ausencias >0){
+                                    articulos2.push(articulo);                                  
+                                }                               
+                            }
+                        }           
+                    }
+                }                     
+        }
 
+        //Guarda la suma total por artículo y por agente    
+        function mapTotalArticulo(articulo, agentesGrupo){
+            let agentes = agentesGrupo.map(ag => {   
+                if (ag.ausentismo[0]){ 
+                    const idx = ag.ausentismo[0].articulos.findIndex(existArticulo, articulo);
+                    ag = { 
+                        _idAg: ag._id,
+                        _id:articulo._id,
+                        ausencias: ( idx>=0)? ag.ausentismo[0].articulos[idx].ausenciasPorArticulo : 0                                              
+                    }
+                    return ag;                               
+                }
+            })
+            return agentes;
+        }
+
+        function existArticulo(element){
+            return element._id.articulo.toString() == this._id.toString() ;
+        }
+        
+        let articulosIds2=[];
+        for(const art of articulos2){
+            articulosIds2.push(art._id); 
+        }
+        
+        //Reemplaza y envía solo los artículos con ausencias > 0
+        articulos = await Articulo.find({"_id": { $in: articulosIds2 }}).sort({ codigo: 1});
+
+        //Filtra solo los agentes con ausencias
+        for (const grupo of gruposAgentes){
+            let agentes2=[];
+            for (const agente of grupo.agentes) {                      
+                    if (agente.ausentismo[0]!==undefined  ) {                            
+                        agentes2.push(agente);  
+                    }                                                  
+            } 
+            grupo.agentes=agentes2;      
+        }
+        
         return { 
-                gruposAgente: gruposAgentes,
-                articulos: articulos,
-                srcImgLogo: this.headerLogo
-            }
-    }
+            gruposAgente: gruposAgentes,
+            articulos: articulos,
+            srcImgLogo: this.headerLogo
+        }
 
+   }
 }
