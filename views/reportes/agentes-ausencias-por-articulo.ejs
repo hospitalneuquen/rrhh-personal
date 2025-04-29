@@ -4,8 +4,7 @@
         
         <!-- LOGO HEADER  -->
         <%- include("base-logo") %>
-
-        <h1>Ausencias. Totales por Articulo</h1>
+        <h1>Ausencias. Totales por Artículo</h1>
             <%- include("../utils/print") %>
             <% for (const grupo of gruposAgente) { %>
             <table class="tg tgw">
@@ -17,9 +16,9 @@
                 </tr>
                 <!-- SUBHEADER  -->
                 <tr> 
-                    <td class="tg-xq07" rowspan="2" style="width:10%"><h3 class="m0">Identificacion</h3></td>
+                    <td class="tg-xq07" rowspan="2" style="width:10%"><h3 class="m0">Identificación</h3></td>
                     <td class="tg-xq07" rowspan="2" style="width:15%"><h3 class="m0">Apellido y Nombre</h3></td>
-                    <td class="tg-xq07" colspan="<%= articulos.length %>" style="width:70%"><h3 class="m0">Articulos</h3></td>
+                    <td class="tg-xq07" colspan="<%= articulos.length %>" style="width:70%"><h3 class="m0">Artículos</h3></td>
                     <td class="tg-xq07" rowspan="2" "width:5%"><h3 class="m0">Total</h3></td>
                 </tr>
                 <tr> 
@@ -51,5 +50,25 @@
             <br>
         <% } %>
 
+        <h1>Leyenda</h1>
+        <%- include("../utils/print") %>
+         <table class="tg tgw">
+            <tr> 
+                <th class="tg-266k" colspan="<%= articulos.length + 4 %>">
+                    <h2 class="m0">Artículos</h2>
+                </th>
+            </tr> 
+            <tr> 
+                <td class="tg-xq07" style="width:10%"><h3 class="m0">Código</h3></td>
+                <td class="tg-xq07"  style="width:15%"><h3 class="m0">Descripción</h3></td>
+            </tr>
+            <% for (const articulo of articulos) { %>
+                <tr> 
+                    <td class="tg-xq07"><class="m0"><%= value(articulo.codigo) %> </td>
+                    <td class="tg-xq07"><class="m0"><%= value(articulo.descripcion) %> </td>  
+                </tr>
+            <% } %>
+         </table>
+        
     </body>
 </html>

@@ -4,7 +4,10 @@
         
         <!-- LOGO HEADER  -->
         <%- include("base-logo") %>
-        
+        <!--Artículos solicitados-->
+        <% let artSolicitados = []; %>
+        <!--Artículos solicitados con campo descripción-->
+        <% let artDescripcion = []; %>
         <h1>Ausencias. Listados por Agente</h1>
             <%- include("../utils/print") %>
             <p><strong>Filtros Aplicados: </strong>  
@@ -23,13 +26,13 @@
                     </tr>
                     <!-- SUBHEADER  -->
                     <tr> 
-                        <td class="tg-xq07" style="width:10%"><h3 class="m0">Numero</h3></td>
+                        <td class="tg-xq07" style="width:10%"><h3 class="m0">Número</h3></td>
                         <td class="tg-xq07" style="width:10%"><h3 class="m0">Documento</h3></td>
                         <td class="tg-xq07" style="width:20%"><h3 class="m0">Nombre y Apellido</h3></td>
                         <td class="tg-xq07" style="width:15%"><h3 class="m0">Desde</h3></td>
                         <td class="tg-xq07" style="width:15%"><h3 class="m0">Hasta</h3></td>
-                        <td class="tg-xq07" style="width:10%"><h3 class="m0">Dias</h3></td>
-                        <td class="tg-xq07" style="width:10%"><h3 class="m0">Articulo</h3></td>
+                        <td class="tg-xq07" style="width:10%"><h3 class="m0">Días</h3></td>
+                        <td class="tg-xq07" style="width:10%"><h3 class="m0">Artículo</h3></td>
                         <td class="tg-xq07" style="width:10%"><h3 class="m0">Obs</h3></td>
                     </tr>
                     <!-- DATA  -->     
@@ -56,12 +59,43 @@
                                     <td><%= aus[index]._id.articulo %></td>
                                     <td><%= aus[index]._id.extra %></td>
                                 </tr>
-                            <% } %>    
+                            <% } %>
+                            <% artSolicitados.push(aus[index]._id.articulo);  %>    
                         <% } %>    
                     <% } %> <!-- end for grupo.agentes-->
+                    <!--Elimina artículos repetidos. Luego agrega campo descripción.-->
+                    <%  
+                        artSolicitados = artSolicitados.filter((item, index)=> { return artSolicitados.indexOf(item)=== index;});
+                        artSolicitados.forEach((item1,index1) => {
+                            articulos.forEach((item2,index2) => {                               
+                                if(artSolicitados[index1] === articulos[index2].codigo){
+                                    artDescripcion.push({codigo:articulos[index2].codigo, descripcion: articulos[index2].descripcion});
+                                }
+                            });     
+                        }); 
+                    %>
                 </table>             
             <br>
-            <% } %>
+            <% } %>         
 
-    </body>
+            <h1>Leyenda</h1>
+            <%- include("../utils/print") %>
+            <table class="tg tgw">
+                <tr> 
+                    <th class="tg-266k" colspan="<%= articulos.length + 4 %>">
+                        <h2 class="m0">Artículos</h2>
+                    </th>          
+                </tr> 
+                <tr> 
+                    <td class="tg-xq07" style="width:10%"><h3 class="m0">Código</h3></td>
+                    <td class="tg-xq07"  style="width:15%"><h3 class="m0">Descripción</h3></td>
+                </tr>
+                <% for (const articulo of artDescripcion) { %>
+                    <tr> 
+                        <td class="tg-xq07"><class="m0"><%= value(articulo.codigo) %> </td>
+                        <td class="tg-xq07"><class="m0"><%= value(articulo.descripcion) %> </td>  
+                    </tr>
+                <% } %>
+            </table>
+     </body>
 </html>
