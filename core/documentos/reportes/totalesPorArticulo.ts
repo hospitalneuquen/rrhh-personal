@@ -113,8 +113,7 @@ export class DocumentoAusenciasTotalesPorArticulo extends DocumentoPDF {
                                     articulos2.push(articulo);                                  
                                 }                               
                             }
-                                  
-                        }                    
+                        }           
                     }
                 }                     
         }
@@ -147,6 +146,17 @@ export class DocumentoAusenciasTotalesPorArticulo extends DocumentoPDF {
         //Reemplaza y envía solo los artículos con ausencias > 0
         articulos = await Articulo.find({"_id": { $in: articulosIds2 }}).sort({ codigo: 1});
 
+        //Filtra solo los agentes con ausencias
+        for (const grupo of gruposAgentes){
+            let agentes2=[];
+            for (const agente of grupo.agentes) {                      
+                    if (agente.ausentismo[0]!==undefined  ) {                            
+                        agentes2.push(agente);  
+                    }                                                  
+            } 
+            grupo.agentes=agentes2;      
+        }
+        
         return { 
             gruposAgente: gruposAgentes,
             articulos: articulos,
