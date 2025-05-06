@@ -85,6 +85,7 @@ export const opcionesAgrupamiento = [
 
 export const opcionesVisualizacion = [
 	// Datos Personales
+	{ id: "cuil", nombre: "Cuil" },
 	{ id: "estadoCivil", nombre: "Estado Civil" },
 	{ id: "nacionalidad.nombre", nombre: "Nacionalidad" },
 	{ id: "sexo", nombre: "Sexo" },
@@ -95,6 +96,7 @@ export const opcionesVisualizacion = [
 	{ id: "direccion.localidad.provincia.nombre", nombre: "Provincia" },
 	// Educacion (Todo)
 	// Cargo
+	{id: "situacionLaboral.fechaIngresoHospital", nombre: "Fecha de Ingreso al Hospital"},
 	{ id: "situacionLaboral.cargo.sector.nombre", nombre: "Lugar de Trabajo" },
 	{ id: "situacionLaboral.cargo.ubicacion.nombre", nombre: "Servicio" },
 	// { id: "$situacionLaboral.cargo.ubicacion.nombre", nombre: "Departamento"}, // ????
