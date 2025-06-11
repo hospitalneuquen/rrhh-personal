@@ -5,13 +5,13 @@
         <% let outerIndex = 0; let hayAgentes = true; %>
         <table>
         <% while (hayAgentes) { %>
-            <% if (outerIndex+1 !=1 && (outerIndex+1) % 10 == 1) { %>
+            <% if (outerIndex+1 !=1 && (outerIndex+1) % 9 == 1) { %>
             <% } %>     
             <tr>
-            <% for (var i = 0; i < 2; i++) { %>
+            <% for (var i = 0; i < 3; i++) { %>
                 <% if (agentes.length > outerIndex) { %>
                     <td>
-                        <%- include('credencial', {agente: agentes[outerIndex], funcion:funciones[outerIndex], servicio:servicios[outerIndex], foto:srcImgCredenciales[outerIndex], srcImgLogoSmall:srcImgLogoSmall}) %>            
+                        <%- include('credencial', {agente: agentes[outerIndex], funcion:funciones[outerIndex], servicio:servicios[outerIndex], foto:srcImgCredenciales[outerIndex], srcImgLogoHospital:srcImgLogoHospital}) %>            
                     </td>
                 <% } else { %>
                     <% hayAgentes = false %>
