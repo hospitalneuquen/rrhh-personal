@@ -1,16 +1,19 @@
-* {
+@font-face {
     font-family: 'Roboto';
     src: url('../fonts/Roboto-Bold.ttf') format('truetype');
     font-style: normal;
     font-weight: 700;
 }
 
-.credencial-salto-pagina{
+#font {
+    font-family: 'Roboto'; 
+}
+
+.credencial-salto-pagina {
     height: 10px;
 }
 
 .container {
-    font-family: 'Roboto' !important;
     margin: 0px 10px 4px 20px;
     background-color: white;
     height: 241px;
@@ -67,7 +70,7 @@
         
     }
   
-    h3{
+    h3 {
         border-top-right-radius: 20px;
         border-top-left-radius: 20px;
         border-bottom-left-radius: 20px;
@@ -80,11 +83,11 @@
         font-size: 9px; 
     }
 
-    .footer{                 
+    .footer {                 
      height: 40px;
      background-color: #17428c;
                       
-        img{
+        img {
             margin: 10px 17px;
             height: 18px;    
         }   
