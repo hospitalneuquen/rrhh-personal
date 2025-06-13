@@ -1,15 +1,9 @@
-@font-face {
-    font-family: 'Roboto';
-    src: url('../fonts/Roboto-Bold.ttf') format('truetype');
-    font-style: normal;
-    font-weight: 700;
-}
-
 .credencial-salto-pagina {
     height: 10px;
 }
 
 .container {
+    font-family: 'Roboto';
     margin: 0px 10px 4px 20px;
     background-color: white;
     height: 241px;
