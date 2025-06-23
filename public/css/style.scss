@@ -7,8 +7,8 @@
     font-weight: 700;
     margin: 0px 10px 4px 20px;
     background-color: white;
-    height: 241px;
-    width: 156px; 
+    height: 321px;
+    width: 208px; 
     color: #17428c; 
     text-transform: uppercase;
     border: 1px solid gray;
@@ -19,7 +19,7 @@
     overflow: hidden;
      
     .credencial {
-        padding: 28px 0px 0px 0px;
+        padding: 38px 0px 0px 0px;
     }
   
     h2 {
@@ -27,37 +27,33 @@
         margin-bottom: 0px;
         line-height: 1;
         overflow: hidden;
-        font-size: 17px;
-        height: 70px;        
     }
 
     h5 {
         margin-top: 5px ;
-        margin-bottom: 10px;
-        font-size: 7px;        
-        height: 25px;
-        padding-bottom: 5px;        
+        margin-bottom: 0px;
+        font-size: 9px;               
     }
 
     .header {
         padding: 10px 10px;
         text-align: center;
         background-color: white;
-        height: 25px;        
+        height: 39px;        
     }
 
     .body {        
         text-align: center;
         background-color: #c9e1f6;
         text-transform: capitalize;
-        height: 110px;
+        height: 152px;
         padding: 10px 10px;
         align-content: center;     
     }
 
     .break {
         clear: both;
-        padding-top:5px ;
+        padding-top:7px ;
         
     }
   
@@ -67,20 +63,20 @@
         border-bottom-left-radius: 20px;
         border-bottom-right-radius: 20px;
         background-color: white;
-        padding: 5px 10px;
-        margin:5px 2px 9px 2px;
+        padding: 7px 14px;
+        margin:0px 10px 0px 10px;
         align-content: center;
         text-transform: uppercase;
-        font-size: 9px; 
+        font-size: 10px; 
     }
 
     .footer {                 
-     height: 40px;
+     height: 53px;
      background-color: #17428c;
                       
         img {
-            margin: 10px 17px;
-            height: 18px;    
+            margin: 17px 40px;
+            height: 19px;    
         }   
     }     
 
