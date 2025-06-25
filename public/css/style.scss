@@ -5,7 +5,7 @@
 .container {
     font-family: "Roboto", sans-serif;
     font-weight: 700;
-    margin: 0px 10px 4px 20px;
+    margin: 20px 10px 10px 30px;
     background-color: white;
     height: 241px;
     width: 156px; 
@@ -19,7 +19,7 @@
     overflow: hidden;
      
     .credencial {
-        padding: 28px 0px 0px 0px;
+        padding: 20px 0px 0px 0px;
     }
   
     h2 {
@@ -27,37 +27,38 @@
         margin-bottom: 0px;
         line-height: 1;
         overflow: hidden;
-        font-size: 17px;
-        height: 70px;        
+        font-size: 17px;   
+        height: 70px;
     }
 
     h5 {
         margin-top: 5px ;
-        margin-bottom: 10px;
+        margin-bottom: 2px;
         font-size: 7px;        
         height: 25px;
-        padding-bottom: 5px;        
+        overflow: hidden;    
     }
 
     .header {
-        padding: 10px 10px;
+        padding: 7px 10px 6px 10px;
         text-align: center;
         background-color: white;
-        height: 25px;        
+        height: 31px;        
     }
 
     .body {        
         text-align: center;
         background-color: #c9e1f6;
         text-transform: capitalize;
-        height: 110px;
-        padding: 10px 10px;
+        height: 113px;
+        padding: 10px 10px 15px 10px;
         align-content: center;     
+        overflow: hidden;
     }
 
     .break {
         clear: both;
-        padding-top:5px ;
+        padding-top:7px ;
         
     }
   
@@ -67,11 +68,13 @@
         border-bottom-left-radius: 20px;
         border-bottom-right-radius: 20px;
         background-color: white;
-        padding: 5px 10px;
-        margin:5px 2px 9px 2px;
+        padding: 5px 10px 5px 10px;
+        margin:0px 2px 0px 2px;
         align-content: center;
         text-transform: uppercase;
         font-size: 9px; 
+        overflow: hidden;
+        height: 25px;
     }
 
     .footer {                 
