@@ -9,8 +9,8 @@
         <%- include("../utils/print") %>
         <% let outerIndex = 0; let hayAgentes = true; %>
         <table>
-        <% while (hayAgentes) { %>
-            <% if (outerIndex+1 !=1 && (outerIndex+1) % 9 == 1) { %>
+        <% while (hayAgentes) { %> <!--Corregir porque no hace salto de pagina-->
+            <% if (outerIndex+1 !=1 && (outerIndex+1) % 9 === 0) { %>
             <% } %>     
             <tr>
             <% for (var i = 0; i < 3; i++) { %>
