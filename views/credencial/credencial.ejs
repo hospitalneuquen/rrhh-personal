@@ -6,14 +6,17 @@
             <% } %> 
         </div>
         <div class="body">
-            <% if (agente) { %>
-                <h2><%= value(agente.nombre) %> <%= value(agente.apellido) %></h2>
-            <% } %>
-            
+            <div class="nombre">
+                <% if (agente) { %>
+                    <h2><%= value(agente.nombre) %> <%= value(agente.apellido) %></h2>
+                <% } %>
+            </div>
             <div class="break"></div>
-            <% if (funcion) { %>
-                <h3><%=value(funcion) %></h3>
-            <% } %>    
+            <div class="funcion">
+                <% if (funcion) { %>
+                    <h3><%=value(funcion) %></h3>
+                <% } %>    
+            </div>
         </div>
         <div class="footer">
             <img src='<%= srcImgLogoHospital %>' alt="logoHospital">
