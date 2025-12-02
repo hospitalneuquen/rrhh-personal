@@ -18,14 +18,30 @@
     align-items: center;
      
     .credencial {
-        padding: 20px 0px 0px 0px;
+        height: 241px;
+        width: 156px;
     }
   
     .header {
-        padding: 7px 10px 6px 10px;
-        text-align: center;
+        height: 40px;  
         background-color: white;
-        height: 31px;        
+        padding: 10px;      
+    }
+
+    .colgante{
+        height: 18px;
+    }
+
+    .contServicio{ 
+        height: 35px; 
+        align-content: center;
+        text-align: center;    
+    }
+
+    .servicio{
+        display: inline-block;
+        max-width: 130px;
+        max-height: 31px;    
     }
 
     h5 {
@@ -34,23 +50,26 @@
         font-size: 7px;        
         max-height: 24px;
         overflow: hidden; 
-        align-content: center;   
         text-transform: uppercase;   
     }
 
     .body {        
         text-align: center;
         background-color: #c9e1f6;
-        text-transform: capitalize;
         height: 117px;
         padding: 10px;
         align-content: center;     
         overflow: hidden;
     }
 
+    .contNombre{
+        align-content: center;
+    }
+
     .nombre{
         overflow: hidden;
         max-height: 69px;
+        max-width: 134px;
         display: inline-block;
     }
 
@@ -64,16 +83,21 @@
     }
     
     .break {
-        clear: both;
-        padding-top:7px ;
+        height: 5px;
         
     }
-     .funcion{
+
+    .contFuncion{
+        align-content: center;
+    }
+
+    .funcion{
         border-radius: 20px;
         background-color: white;
-        padding: 5px 10px 5px 10px;
+        padding: 5px 10px;
         display: inline-block;
         max-height: 28px;
+        max-width: 114px;
     }
 
     h3 {
@@ -86,12 +110,13 @@
     }
 
     .footer {                 
-     height: 40px;
-     background-color: #17428c;
-                      
+    height: 40px;
+    background-color: #17428c;
+    text-align: center;                 
         img {
             margin: 10px 17px;
-            height: 18px;    
+            height: 18.5px;
+            width: 120px;    
         }   
     }     
 
