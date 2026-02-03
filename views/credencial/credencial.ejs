@@ -1,29 +1,21 @@
 <div class="container">
     <div class="credencial">
         <div class="header">
-            <div class="colgante"></div> 
-            <div class="contServicio">
-                <div class="servicio">
-                    <% if (servicio) { %>
-                        <h5><%= value(servicio) %></h5>
-                    <% } %> 
-                </div>
-            </div>
+            <% if (servicio) { %>
+                <h5 class="servicio"><%= value(servicio) %></h5>
+            <% } %> 
         </div>
         <div class="body">
-            <div class="contNombre"> 
-                <div class="nombre">
-                    <% if (agente) { %>
-                        <h2><%= value(agente.nombre) %> <%= value(agente.apellido) %></h2>
-                    <% } %>
-                </div>
+            <div class="nombre">
+                <% if (agente) { %>
+                    <h2><%= value(agente.nombre) %> <%= value(agente.apellido) %></h2>
+                <% } %>
             </div>
-            <div class="contFuncion">
-                <div class="funcion">
-                    <% if (funcion) { %>
-                        <h3><%=value(funcion) %></h3>
-                    <% } %>    
-                </div>
+            <div class="break"></div>
+            <div class="funcion">
+                <% if (funcion) { %>
+                    <h3><%=value(funcion) %></h3>
+                <% } %>    
             </div>
         </div>
         <div class="footer">

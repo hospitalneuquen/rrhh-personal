@@ -8,131 +8,91 @@
     margin: 5px 10px 12px 28px;
     background-color: white;
     height: 241px;
-    width: 156px;
-    color: #17428c;
+    width: 156px; 
+    color: #17428c; 
     border: 1px solid gray;
-    border-radius: 15px;
+    border-radius: 15px;;
     overflow: hidden;
-
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+     
     .credencial {
-        height: 100%;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
+        padding: 20px 0px 0px 0px;
     }
-
-    /* ---------- HEADER ---------- */
-
+  
     .header {
-        height: 40px;
-        padding: 10px;
-        background-color: white;
-    }
-
-    .colgante {
-        height: 10px;
-    }
-
-    .contServicio {
-        height: 30px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        padding: 7px 10px 6px 10px;
         text-align: center;
-    }
-
-    .servicio {
-        max-width: 130px;
+        background-color: white;
+        height: 31px;        
     }
 
     h5 {
-        font-size: 7px;
-        max-height:20px;
-        overflow: hidden;
-        text-transform: uppercase;
-        word-break: break-word;
-        overflow-wrap: break-word;
-
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 3;
-  
+        margin-top: 5px ;
+        margin-bottom: 2px;
+        font-size: 7px;        
+        max-height: 24px;
+        overflow: hidden; 
+        align-content: center;   
+        text-transform: uppercase;   
     }
 
-    /* ---------- BODY ---------- */
-
-    .body {
-        flex: 1;
-        background-color: #c9e1f6;
-        padding: 10px;
-        overflow: hidden;
-
-        display: flex;
-        flex-direction: column;
-        justify-content: center; /* centrado vertical*/
-        align-items: center;     /* centrado horizontal*/
-        gap: 10px;
-    }
-
-    .contNombre,
-    .contFuncion {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-    }
-
-    .nombre {
-        max-width: 134px;
-        max-height: 69px;
-        overflow: hidden;
+    .body {        
         text-align: center;
+        background-color: #c9e1f6;
+        text-transform: capitalize;
+        height: 117px;
+        padding: 10px;
+        align-content: center;     
+        overflow: hidden;
+    }
+
+    .nombre{
+        overflow: hidden;
+        max-height: 69px;
+        display: inline-block;
     }
 
     h2 {
-        font-size: 17px;
+        margin: 0px;
+        overflow: hidden;
+        font-size: 15px;   
+        max-height: 69px;
+        align-content: center;
         text-transform: capitalize;
-        word-break: break-word;
-        overflow-wrap: break-word;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 4;
-        overflow: hidden;
     }
-
-    .funcion {
-        background-color: white;
+    
+    .break {
+        clear: both;
+        padding-top:7px ;
+        
+    }
+     .funcion{
         border-radius: 20px;
-        padding: 5px 10px;
-        max-width: 114px;
+        background-color: white;
+        padding: 5px 10px 5px 10px;
+        display: inline-block;
         max-height: 28px;
-        text-align: center;
-        overflow: hidden;
     }
 
     h3 {
-        font-size: 9px;
-        text-transform: uppercase;
-        align-content: center; 
-        word-break: break-word;
-        overflow-wrap: break-word;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 3;
+        margin:0px;
+        align-content: center;     
+        font-size: 9px; 
         overflow: hidden;
+        max-height: 28px;
+        text-transform: uppercase;
     }
 
-    /* ---------- FOOTER ---------- */
-
-    .footer {
-        height: 40px;
-        background-color: #17428c;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
+    .footer {                 
+     height: 40px;
+     background-color: #17428c;
+                      
         img {
-            height: 18.5px;
-            width: 120px;
-        }
-    }
+            margin: 10px 17px;
+            height: 18px;    
+        }   
+    }     
+
 }
