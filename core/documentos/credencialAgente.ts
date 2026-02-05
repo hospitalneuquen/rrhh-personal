@@ -13,7 +13,7 @@ export class DocumentoCredencialAgente extends DocumentoPDF {
     outputFilename = `${config.app.uploadFilesPath}/credencialAgente.pdf`;
 
     getCSSFiles(){
-        return this.isPrintable? ["css/style.scss"] : ["css/style.scss"];
+        return this.isPrintable? ["css/style.scss", "css/reset.scss"] : ["css/style.scss"];
     }
 
     async getContextData(){

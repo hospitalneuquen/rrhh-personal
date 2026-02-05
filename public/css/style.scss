@@ -21,12 +21,17 @@
         padding: 20px 0px 0px 0px;
     }
   
+  
     .header {
+        display: flex;
+        justify-content: center; /* centra horizontalmente */
+        align-items: center;     /* centra verticalmente */
+        height: 31px;            /* mantener altura original */
         padding: 7px 10px 6px 10px;
-        text-align: center;
         background-color: white;
-        height: 31px;        
+        text-align: center;      /* por si queda texto multilinea */
     }
+
 
     h5 {
         margin-top: 5px ;
