@@ -31,13 +31,13 @@ export default {
     auth: {
         method: env('AUTH', ''),
         ldap: {
-            host: env('LADP_HOST', 'localhost'),
+            host: env('LADP_HOST', 'http://ldap.neuquen.gov.ar/'),
             port: env('LADP_PORT', 389),
-            ou: env('LADP_OU', ''),
+            ou: env('LADP_OU', 'ou=People,o=integrabilidad,o=neuquen'),
         },
     },
     database: {
-        mongo: env('MONGO_HOST', 'mongodb://localhost:27017/test'),
+       mongo: env('MONGO_HOST', 'mongodb://localhost:27017/test'),
         sqlserverAnviz: {
             server: env('SQLSERVER_SERVER', 'localhost'),
             database: env('SQLSERVER_DB', 'test'),
@@ -63,8 +63,8 @@ export const auth = {
 
 // Hosts
 export const hosts = {
-    // ldap: env("LDAP_HOST", "ldap.neuquen.gov.ar"),
-    ldap: env('LDAP_HOST', '172.16.1.74'),
+    ldap: env("LDAP_HOST", "ldap.neuquen.gov.ar"),
+    //ldap: env('LDAP_HOST', '172.16.1.74'),
 };
 
 // Puerto de LDAP
