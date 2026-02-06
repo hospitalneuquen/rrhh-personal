@@ -1,6 +1,13 @@
+
 .credencial-salto-pagina {
     height: 10px;
 }
+
+.container,
+.container * {
+  box-sizing: border-box;
+}
+
 
 .container {
     font-family: "Roboto", sans-serif;
@@ -8,96 +15,147 @@
     margin: 5px 10px 12px 28px;
     background-color: white;
     height: 241px;
-    width: 156px; 
-    color: #17428c; 
+    width: 156px;
+    color: #17428c;
     border: 1px solid gray;
-    border-radius: 15px;;
+    border-radius: 15px;
     overflow: hidden;
-    display: flex;
-    justify-content: center; 
-    align-items: center;
-     
+
     .credencial {
-        padding: 20px 0px 0px 0px;
-    }
-  
-  
-    .header {
+        height: 100%;
+        width: 100%;
         display: flex;
-        justify-content: center; /* centra horizontalmente */
-        align-items: center;     /* centra verticalmente */
-        height: 31px;            /* mantener altura original */
-        padding: 7px 10px 6px 10px;
-        background-color: white;
-        text-align: center;      /* por si queda texto multilinea */
+        flex-direction: column;
     }
 
+    /* ---------- HEADER ---------- */
+
+    .header {
+        height: 40px;
+        padding: 10px;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .colgante {
+        height: 10px;
+    }
+
+    .contServicio {
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .servicio {
+        max-width: 130px;
+    }
 
     h5 {
-        margin-top: 5px ;
-        margin-bottom: 2px;
-        font-size: 7px;        
-        max-height: 24px;
-        overflow: hidden; 
-        align-content: center;   
-        text-transform: uppercase;   
+        font-size: 7px;
+        max-height:20px; /*24px;*/
+        overflow: hidden;
+        text-transform: uppercase;
+        word-break: break-word;
+        overflow-wrap: break-word;
+
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+
+     
     }
 
-    .body {        
-        text-align: center;
+    /* ---------- BODY ---------- */
+
+    .body {
+        flex: 1;
         background-color: #c9e1f6;
-        text-transform: capitalize;
-        height: 117px;
         padding: 10px;
-        align-content: center;     
         overflow: hidden;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* centrado vertical*/
+        align-items: center;     /* centrado horizontal*/
+         transform: translateY(2px);
+        /*gap: 10px;*/
+    
     }
 
-    .nombre{
-        overflow: hidden;
-        max-height: 69px;
-        display: inline-block;
+    .contNombre,
+    .contFuncion {
+        width: 100%;
+        display: flex;
+        justify-content: center;
     }
+
+    .nombre {
+        max-width: 134px;
+        max-height: 69px;
+        overflow: hidden;
+        text-align: center;
+    }
+    h2, h3, h5 {
+        line-height: 1.2;
+    }
+
 
     h2 {
-        margin: 0px;
-        overflow: hidden;
-        font-size: 15px;   
-        max-height: 69px;
-        align-content: center;
+        font-size: 17px;
         text-transform: capitalize;
+        word-break: break-word;
+        overflow-wrap: break-word;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 4;
+
+        overflow: hidden;
+
+
     }
-    
-    .break {
-        clear: both;
-        padding-top:7px ;
-        
-    }
-     .funcion{
-        border-radius: 20px;
+
+    .funcion {
         background-color: white;
-        padding: 5px 10px 5px 10px;
-        display: inline-block;
+        border-radius: 20px;
+        padding: 5px 10px;
+        max-width: 114px;
         max-height: 28px;
+        text-align: center;
+        overflow: hidden;
     }
 
     h3 {
-        margin:0px;
-        align-content: center;     
-        font-size: 9px; 
-        overflow: hidden;
-        max-height: 28px;
+        font-size: 9px;
         text-transform: uppercase;
+        align-content: center; 
+        word-break: break-word;
+        overflow-wrap: break-word;
+
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+
+        overflow: hidden;
+
     }
 
-    .footer {                 
-     height: 40px;
-     background-color: #17428c;
-                      
-        img {
-            margin: 10px 17px;
-            height: 18px;    
-        }   
-    }     
+    /* ---------- FOOTER ---------- */
 
+    .footer {
+        height: 40px;
+        background-color: #17428c;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img {
+            height: 18.5px;
+            width: 120px;
+        }
+    }
 }
