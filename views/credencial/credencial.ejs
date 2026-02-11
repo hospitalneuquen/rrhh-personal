@@ -11,18 +11,20 @@
             </div>
         </div>
         <div class="body">
-            <div class="contNombre"> 
-                <div class="nombre">
-                    <% if (agente) { %>
-                        <h2><%= value(agente.nombre) %> <%= value(agente.apellido) %></h2>
-                    <% } %>
+            <div class="contBody">
+                <div class="contNombre"> 
+                    <div class="nombre">
+                        <% if (agente) { %>
+                            <h2><%= value(agente.nombre) %> <%= value(agente.apellido) %></h2>
+                        <% } %>
+                    </div>
                 </div>
-            </div>
-            <div class="contFuncion">
-                <div class="funcion">
-                    <% if (funcion) { %>
-                        <h3><%=value(funcion) %></h3>
-                    <% } %>    
+                <div class="contFuncion">
+                    <div class="funcion">
+                        <% if (funcion) { %>
+                            <h3><%=value(funcion) %></h3>
+                        <% } %>    
+                    </div>
                 </div>
             </div>
         </div>

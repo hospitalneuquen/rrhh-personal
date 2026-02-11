@@ -43,7 +43,7 @@
     }
 
     .contServicio {
-        height: 30px;
+        height: 20px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -52,11 +52,15 @@
 
     .servicio {
         max-width: 130px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
     }
 
     h5 {
         font-size: 7px;
-        max-height:20px; /*24px;*/
+        max-height:20px;
         overflow: hidden;
         text-transform: uppercase;
         word-break: break-word;
@@ -66,24 +70,25 @@
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 3;
 
-     
     }
 
     /* ---------- BODY ---------- */
 
     .body {
-        flex-grow: 1;
+        flex: 1;
         background-color: #c9e1f6;
         padding: 10px;
         overflow: hidden;
-        height: 151px;
+        display: flex;
+    }
 
+    .contBody{
+        flex: 1;       
+        width: 100%;
         display: flex;
         flex-direction: column;
-        justify-content: center; /* centrado vertical*/
-        align-items: center;     /* centrado horizontal*/
-        /*gap: 10px;*/
-    
+        justify-content: center; 
+        align-items: center;    
     }
 
     .contNombre,
@@ -120,6 +125,10 @@
 
     }
 
+    .contFuncion{
+         margin-top: 10px;
+    }
+
     .funcion {
         background-color: white;
         border-radius: 20px;
@@ -128,13 +137,11 @@
         max-height: 45px;
         text-align: center;
         overflow: hidden;
-        margin-top: 10px;
     }
 
     h3 {
         font-size: 9px;
         text-transform: uppercase;
-        align-content: center; 
         word-break: break-word;
         overflow-wrap: break-word;
 
@@ -156,6 +163,7 @@
         align-items: center;
 
         img {
+            display: block;
             height: 18.5px;
             width: 120px;
         }
