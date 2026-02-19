@@ -43,6 +43,7 @@
     }
 
     .contServicio {
+        margin-top: 0.6em;
         height: 20px;
         display: flex;
         justify-content: center;
@@ -60,7 +61,7 @@
 
     h5 {
         font-size: 7px;
-        max-height:20px;
+        max-height:22px;
         overflow: hidden;
         text-transform: uppercase;
         word-break: break-word;
@@ -93,6 +94,9 @@
         align-items: center;    
     }
 
+    .contNombre{
+        margin-top: 0.9em;
+    }
     .contNombre,
     .contFuncion {
         width: 100%;
@@ -108,13 +112,14 @@
         text-align: center;
     }
     h2, h3, h5 {
-        line-height: 1;
+        line-height: 1.1em;
         text-align: center;
+      
     }
 
 
     h2 {
-        font-size: 17px;
+        /*font-size: 17px;*/
         text-transform: capitalize;
         word-break: break-word;
         overflow-wrap: break-word;
@@ -128,7 +133,7 @@
     }
 
     .contFuncion{
-         margin-top: 10px;
+        margin-top: 0.6em;
     }
 
     .funcion {
@@ -139,6 +144,7 @@
         max-height: 45px;
         text-align: center;
         overflow: hidden;
+        padding-top: 0.6em;
     }
 
     h3 {
