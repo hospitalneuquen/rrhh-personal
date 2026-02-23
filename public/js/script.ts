@@ -56,15 +56,18 @@ function margin(
 }
 
 
-const h2 = document.querySelector("h2") as HTMLElement | null;
-const h3 = document.querySelector("h3") as HTMLElement | null;
-const contNombre = document.querySelector(".contNombre") as HTMLElement | null;
+document.querySelectorAll(".container").forEach(container => {
 
+  const h2 = container.querySelector("h2") as HTMLElement | null;
+  const h3 = container.querySelector("h3") as HTMLElement | null;
+  const contNombre = document.querySelector(".contNombre") as HTMLElement | null;
 
-if (h2 && h3 && contNombre) {
+  if (h2 && h3 && contNombre) {
 
-  const lineasNombre = lineas(h2);
-  const lineasFuncion = lineas(h3);
+    const lineasNombre = lineas(h2);
+    const lineasFuncion = lineas(h3);
 
-  margin(lineasFuncion, lineasNombre, contNombre);
-}
+    margin(lineasFuncion, lineasNombre, contNombre);
+  }
+
+});
