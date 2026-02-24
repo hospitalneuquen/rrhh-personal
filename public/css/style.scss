@@ -43,7 +43,7 @@
     }
 
     .contServicio {
-        margin-top: 0.6em;
+        margin-top: 0.4em; /*ver*/
         height: 20px;
         display: flex;
         justify-content: center;
@@ -94,9 +94,9 @@
         align-items: center;    
     }
 
-    .contNombre{
+    /*.contNombre{
         margin-top: 0.9em;
-    }
+    }*/
     .contNombre,
     .contFuncion {
         width: 100%;
@@ -166,14 +166,10 @@
     .footer {
         height: 40px;
         background-color: #17428c;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
+                      
         img {
-            display: block;
-            height: 18.5px;
-            width: 120px;
-        }
+            margin: 10px 17px;
+            height: 18px;    
+        } 
     }
 }
