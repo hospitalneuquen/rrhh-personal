@@ -94,15 +94,12 @@
         align-items: center;    
     }
 
-    /*.contNombre{
-        margin-top: 0.9em;
-    }*/
+   
     .contNombre,
     .contFuncion {
         width: 100%;
         display: flex;
-        justify-content: center;
-       
+        justify-content: center;   
     }
 
     .nombre {
@@ -112,7 +109,7 @@
         text-align: center;
     }
     h2, h3, h5 {
-        line-height: 1.1em;
+        line-height: 1.1 !important;
         text-align: center;
       
     }
@@ -128,8 +125,6 @@
         -webkit-line-clamp: 4;
 
         overflow: hidden;
-
-
     }
 
     .contFuncion{
@@ -139,12 +134,11 @@
     .funcion {
         background-color: white;
         border-radius: 20px;
-        padding: 10px 10px;
+        padding: 5px 10px;
         max-width: 134px;
         max-height: 45px;
         text-align: center;
         overflow: hidden;
-        padding-top: 0.6em;
     }
 
     h3 {

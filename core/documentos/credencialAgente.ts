@@ -48,6 +48,47 @@ export class DocumentoCredencialAgente extends DocumentoPDF {
         const agenteFotoModel = makeFs();
         for (const agente of agentes) {
             
+            //calculo para margen-top dinamico de nombre
+           const nombreCompleto = `${agente.nombre || ''} ${agente.apellido || ''}`;
+
+            const lineasNombre = this.estimarLineas(nombreCompleto);
+            const funcion = `${agente.agente.situacionLaboral.cargosubpuesto.nombre || ''}`;
+            const lineasFuncion = this.estimarLineas(funcion);
+            let marginTop = 0;
+
+            switch (lineasFuncion) {
+                case 1:
+                    switch (lineasNombre) {
+                        case 1: marginTop = 35.25; break;
+                        case 2: marginTop = 28; break;
+                        case 3: marginTop = 16.35; break;
+                        case 4: marginTop = 8.55; break;
+                        default: marginTop =8.55;
+                    }
+                    break;
+                case 2:  
+                    switch (lineasNombre) {
+                        case 1: marginTop = 32.3; break;
+                        case 2: marginTop = 22.5; break;
+                        case 3: marginTop = 13.4; break;
+                        case 4: marginTop = 3.6;  break;
+                        default: marginTop =3.6;
+                    }
+                    break;
+                case 3:
+                    switch (lineasNombre) {
+                        case 1: marginTop = 29.5; break;
+                        case 2: marginTop = 20.25; break;
+                        case 3: marginTop = 11.6; break;
+                        case 4: marginTop = 1.8; break;
+                        default: marginTop =1.8;                        
+                    }
+                    break;
+            }
+
+
+            agente.marginTopNombre = marginTop;
+
             // Recuperamos la foto de cada agente
             const files = await agenteFotoModel.find({ 'metadata.agenteID': new Types.ObjectId(agente._id) });
             let file:any;
@@ -76,8 +117,9 @@ export class DocumentoCredencialAgente extends DocumentoPDF {
             funciones: funciones,
             servicios: servicios,
             srcImgCredenciales: srcImgCredenciales,
-            srcImgLogoHospital: `${config.app.url}:${config.app.port}/static/images/logoSolo.svg`
+            srcImgLogoHospital: `${config.app.url}:${config.app.port}/static/images/logoSolo.svg`,
         }
+        
     }
 
 
@@ -90,4 +132,12 @@ export class DocumentoCredencialAgente extends DocumentoPDF {
         const minutes = date.getMinutes();
         return `${day}/${month}/${year} ${hours}:${minutes}`;
     }
+
+    private estimarLineas(texto: string): number {
+        if (!texto) return 1;
+
+        const caracteresPorLinea = 18; 
+        return Math.ceil(texto.length / caracteresPorLinea);
+    }
+
 }
