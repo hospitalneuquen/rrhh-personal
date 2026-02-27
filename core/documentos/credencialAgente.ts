@@ -46,15 +46,20 @@ export class DocumentoCredencialAgente extends DocumentoPDF {
         let srcImgCredenciales = [];
         let servicios = [];
         let funciones = [];
+        let margenes = [];
+
         const agenteFotoModel = makeFs();
         for (const agente of agentes) {
             console.log("entrar en for agente");
             //calculo para margen-top dinamico de nombre
            const nombreCompleto = `${agente.nombre || ''} ${agente.apellido || ''}`;
-
-            const lineasNombre = this.estimarLineas(nombreCompleto);
-            const funcion = `${agente.agente.situacionLaboral.cargosubpuesto.nombre || ''}`;
-            const lineasFuncion = this.estimarLineas(funcion);
+            console.log(nombreCompleto);
+            const lineasNombre = this.estimarLineas(nombreCompleto,11);//12
+            console.log("nombre",lineasNombre);
+            const funcion = `${agente.situacionLaboral.cargo.subpuesto.nombre || ''}`;
+            const lineasFuncion = this.estimarLineas(funcion, 20);
+            console.log(funcion);
+             console.log("funcion", lineasFuncion);
             let marginTop = 0;
 
             switch (lineasFuncion) {
@@ -87,9 +92,10 @@ export class DocumentoCredencialAgente extends DocumentoPDF {
                     break;
             }
 
-
-            agente.marginTopNombre = marginTop;
-
+   
+           //agente.marginTopNombre = marginTop;
+           margenes.push(marginTop);
+        
             // Recuperamos la foto de cada agente
             const files = await agenteFotoModel.find({ 'metadata.agenteID': new Types.ObjectId(agente._id) });
             let file:any;
@@ -112,11 +118,12 @@ export class DocumentoCredencialAgente extends DocumentoPDF {
             servicios.push(cargo? cargo.servicio.nombre: '')
             
         }
-        
+         console.log(margenes);
         return {
             agentes: agentes,
             funciones: funciones,
             servicios: servicios,
+            margenes : margenes,
             srcImgCredenciales: srcImgCredenciales,
             srcImgLogoHospital: `${config.app.url}:${config.app.port}/static/images/logoSolo.svg`,
         }
@@ -134,11 +141,12 @@ export class DocumentoCredencialAgente extends DocumentoPDF {
         return `${day}/${month}/${year} ${hours}:${minutes}`;
     }
 
-    private estimarLineas(texto: string): number {
-        console.log("estimar lineas");
+    private estimarLineas(texto: string, caracteresPorLinea:number): number {
+  
         if (!texto) return 1;
 
-        const caracteresPorLinea = 18; 
+        //const caracteresPorLinea = 18; 
+        console.log("long", texto.length);
         return Math.ceil(texto.length / caracteresPorLinea);
     }
 
