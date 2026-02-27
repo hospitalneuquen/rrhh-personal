@@ -57,6 +57,7 @@ export class DocumentoPDF {
 	request: any;
 
 	constructor(printable:boolean=false){
+		console.log("cibstructor documentos.ts");
 		this.isPrintable = printable;
 	}
 
@@ -100,6 +101,7 @@ export class DocumentoPDF {
 	 * Override this method to add custom css per document.
 	 */
 	protected getCSSFiles(){
+		console.log("getCSSfiles");
 		return ["css/reset.scss"];
 	}
 
@@ -168,6 +170,7 @@ export class DocumentoPDF {
 	}
 
 	async generarHTML() {
+		console.log("generarHtml");
 		let htmlTemplate = this.getTemplate();
 		let ctx = await this.getContextData();
 		let extraScripts = this.getExtraScripts();
@@ -177,6 +180,7 @@ export class DocumentoPDF {
 	}
 
 	async generarPDFFile(html) {
+		console.log("generarPDFFile");
 		return new Promise((resolve, reject) => {
 			let options = this.getDocumentoOptions();
 			pdf.create(html, options).toFile(
@@ -192,6 +196,7 @@ export class DocumentoPDF {
 	}
 
 	async getPDF(req) {
+		console.log("getPDF");
 		try {
 			this.request = req;
 			let html = await this.generarHTML();
@@ -203,6 +208,7 @@ export class DocumentoPDF {
 	}
 
 	async getHTML(req) {
+		console.log("getHtml");
 		this.request = req;
 		let html = await this.generarHTML();
 		return html;

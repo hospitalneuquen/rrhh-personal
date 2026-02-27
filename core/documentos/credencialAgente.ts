@@ -17,6 +17,7 @@ export class DocumentoCredencialAgente extends DocumentoPDF {
     }
 
     async getContextData(){
+        console.log("entrar en getCOntextData credencialAgente");
         const token = this.request.token;
         // Recuperamos los parametros de busqueda aplicados
         let params = aqp(this.request.query, {
@@ -47,7 +48,7 @@ export class DocumentoCredencialAgente extends DocumentoPDF {
         let funciones = [];
         const agenteFotoModel = makeFs();
         for (const agente of agentes) {
-            
+            console.log("entrar en for agente");
             //calculo para margen-top dinamico de nombre
            const nombreCompleto = `${agente.nombre || ''} ${agente.apellido || ''}`;
 
@@ -134,6 +135,7 @@ export class DocumentoCredencialAgente extends DocumentoPDF {
     }
 
     private estimarLineas(texto: string): number {
+        console.log("estimar lineas");
         if (!texto) return 1;
 
         const caracteresPorLinea = 18; 
