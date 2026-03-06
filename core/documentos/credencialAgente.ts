@@ -46,55 +46,71 @@ export class DocumentoCredencialAgente extends DocumentoPDF {
         let srcImgCredenciales = [];
         let servicios = [];
         let funciones = [];
-        let margenes = [];
+        let margenesServicio = [];
+        let margenesNombre = [];
+
 
         const agenteFotoModel = makeFs();
         for (const agente of agentes) {
             console.log("entrar en for agente");
             //calculo para margen-top dinamico de nombre
-           const nombreCompleto = `${agente.nombre || ''} ${agente.apellido || ''}`;
+            const servicio = `${agente.situacionLaboral.cargo.servicio.nombre || ''}`;
+            const lineasServicio = this.estimarLineas(servicio,34);
+            console.log(servicio);
+            console.log("servicio", lineasServicio);
+            
+            const nombreCompleto = `${agente.nombre || ''} ${agente.apellido || ''}`;
             console.log(nombreCompleto);
-            const lineasNombre = this.estimarLineas(nombreCompleto,11);//12
+            const lineasNombre = this.estimarLineas(nombreCompleto,17);//11
             console.log("nombre",lineasNombre);
+            
             const funcion = `${agente.situacionLaboral.cargo.subpuesto.nombre || ''}`;
-            const lineasFuncion = this.estimarLineas(funcion, 20);
+            const lineasFuncion = this.estimarLineas(funcion, 22);//20
             console.log(funcion);
-             console.log("funcion", lineasFuncion);
-            let marginTop = 0;
+            console.log("funcion", lineasFuncion);
+            
+            let marginTopNombre = 0;
+            let marginTopServicio = 0;
+
+            switch (lineasServicio) { /*ver que valor le doy, medir */
+                case 1: marginTopServicio = 6; break;
+                case 2: marginTopServicio = 2; break;
+                case 3: marginTopServicio = 0; break;
+                default: marginTopServicio = 0; 
+            }
+            margenesServicio.push(marginTopServicio);
 
             switch (lineasFuncion) {
                 case 1:
                     switch (lineasNombre) {
-                        case 1: marginTop = 35.25; break;
-                        case 2: marginTop = 28; break;
-                        case 3: marginTop = 16.35; break;
-                        case 4: marginTop = 8.55; break;
-                        default: marginTop =8.55;
+                        case 1: marginTopNombre = 35.25; break;
+                        case 2: marginTopNombre = 28; break;
+                        case 3: marginTopNombre = 16.35; break;
+                        case 4: marginTopNombre = 8.55; break;
+                        default: marginTopNombre =8.55;
                     }
                     break;
                 case 2:  
                     switch (lineasNombre) {
-                        case 1: marginTop = 32.3; break;
-                        case 2: marginTop = 22.5; break;
-                        case 3: marginTop = 13.4; break;
-                        case 4: marginTop = 3.6;  break;
-                        default: marginTop =3.6;
+                        case 1: marginTopNombre = 32.3; break;
+                        case 2: marginTopNombre = 22.5; break;
+                        case 3: marginTopNombre = 13.4; break;
+                        case 4: marginTopNombre = 3.6;  break;
+                        default: marginTopNombre =3.6;
                     }
                     break;
                 case 3:
                     switch (lineasNombre) {
-                        case 1: marginTop = 29.5; break;
-                        case 2: marginTop = 20.25; break;
-                        case 3: marginTop = 11.6; break;
-                        case 4: marginTop = 1.8; break;
-                        default: marginTop =1.8;                        
+                        case 1: marginTopNombre = 29.5; break;
+                        case 2: marginTopNombre = 20.25; break;
+                        case 3: marginTopNombre = 11.6; break;
+                        case 4: marginTopNombre = 1.8; break;
+                        default: marginTopNombre =1.8;                        
                     }
                     break;
             }
-
-   
-           //agente.marginTopNombre = marginTop;
-           margenes.push(marginTop);
+           
+           margenesNombre.push(marginTopNombre);
         
             // Recuperamos la foto de cada agente
             const files = await agenteFotoModel.find({ 'metadata.agenteID': new Types.ObjectId(agente._id) });
@@ -114,16 +130,18 @@ export class DocumentoCredencialAgente extends DocumentoPDF {
             }
             // Identificamos funcion y servicio de cada agente
             const cargo = agente.situacionLaboral? agente.situacionLaboral.cargo : null;
+            servicios.push(cargo? cargo.servicio.nombre: '');
             funciones.push(cargo? cargo.subpuesto.nombre : '');
-            servicios.push(cargo? cargo.servicio.nombre: '')
             
         }
-         console.log(margenes);
+        console.log(margenesServicio);
+        console.log(margenesNombre);
         return {
             agentes: agentes,
             funciones: funciones,
             servicios: servicios,
-            margenes : margenes,
+            margenesServicio : margenesServicio,
+            margenesNombre : margenesNombre,
             srcImgCredenciales: srcImgCredenciales,
             srcImgLogoHospital: `${config.app.url}:${config.app.port}/static/images/logoSolo.svg`,
         }
@@ -144,7 +162,6 @@ export class DocumentoCredencialAgente extends DocumentoPDF {
     private estimarLineas(texto: string, caracteresPorLinea:number): number {
   
         if (!texto) return 1;
-
         //const caracteresPorLinea = 18; 
         console.log("long", texto.length);
         return Math.ceil(texto.length / caracteresPorLinea);

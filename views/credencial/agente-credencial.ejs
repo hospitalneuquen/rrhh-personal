@@ -15,7 +15,7 @@
         <% for (var i = 0; i < 3; i++) { %>
             <% if (agentes.length > outerIndex) { %>
                 <td>
-                    <%- include('credencial', {agente: agentes[outerIndex], funcion:funciones[outerIndex], servicio:servicios[outerIndex], margen:margenes[outerIndex] ,srcImgLogoHospital:srcImgLogoHospital}) %>
+                    <%- include('credencial', {agente: agentes[outerIndex], funcion:funciones[outerIndex], servicio:servicios[outerIndex], margenServicio:margenesServicio[outerIndex], margenNombre:margenesNombre[outerIndex], srcImgLogoHospital:srcImgLogoHospital}) %>
                 </td>
             <% } else { %>
                 <% hayAgentes = false %>

@@ -2,7 +2,7 @@
     <div class="credencial">
         <div class="header">
             <div class="colgante"></div> 
-            <div class="contServicio">
+            <div class="contServicio" style="margin-top:<%= value(margenServicio) %>px %>">
                 <div class="servicio">
                     <% if (servicio) { %>
                         <h5><%= value(servicio) %></h5>
@@ -12,7 +12,7 @@
         </div>
         <div class="body">
             <div class="contBody">
-                <div class="contNombre"  style="margin-top:<%= value(margen) %>px %>"> 
+                <div class="contNombre"  style="margin-top:<%= value(margenNombre) %>px %>"> 
                     <div class="nombre">
                         <% if (agente) { %>
                             <h2><%= value(agente.nombre) %> <%= value(agente.apellido) %></h2>

@@ -43,7 +43,7 @@
     }
 
     .contServicio {
-        margin-top: 0.4em; /*ver*/
+        //margin-top: 0.4em;
         height: 20px;
         display: flex;
         justify-content: center;
@@ -95,11 +95,16 @@
     }
 
    
-    .contNombre,
-    .contFuncion {
+    .contNombre{
         width: 100%;
         display: flex;
         justify-content: center;   
+    }
+
+     .contFuncion {
+        display: flex;
+        justify-content: center; 
+        margin-top: 0.6em;  
     }
 
     .nombre {
@@ -127,10 +132,6 @@
         overflow: hidden;
     }
 
-    .contFuncion{
-        margin-top: 0.6em;
-    }
-
     .funcion {
         background-color: white;
         border-radius: 20px;
@@ -139,6 +140,7 @@
         max-height: 45px;
         text-align: center;
         overflow: hidden;
+        width: fit-content;
     }
 
     h3 {
