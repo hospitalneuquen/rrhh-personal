@@ -133,27 +133,28 @@
     }
 
     .funcion {
-        background-color: white;
         border-radius: 20px;
-        padding: 5px 10px;
-        max-width: 134px;
+        background-color: white;
+        padding: 5px 10px 5px 10px;
+        display: inline-block;
         max-height: 45px;
-        text-align: center;
-        overflow: hidden;
-        width: fit-content;
+
     }
 
     h3 {
-        font-size: 9px;
+        margin:0px;
+        align-content: center;     
+        font-size: 9px; 
+        overflow: hidden;
+        max-height: 45px;
         text-transform: uppercase;
+
         word-break: break-word;
         overflow-wrap: break-word;
 
         display: -webkit-box;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 3;
-
-        overflow: hidden;
 
     }
 

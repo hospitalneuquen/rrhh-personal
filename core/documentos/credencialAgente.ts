@@ -72,9 +72,9 @@ export class DocumentoCredencialAgente extends DocumentoPDF {
             let marginTopNombre = 0;
             let marginTopServicio = 0;
 
-            switch (lineasServicio) { /*ver que valor le doy, medir */
-                case 1: marginTopServicio = 6; break;
-                case 2: marginTopServicio = 2; break;
+            switch (lineasServicio) {
+                case 1: marginTopServicio = 8; break;
+                case 2: marginTopServicio = 6; break;
                 case 3: marginTopServicio = 0; break;
                 default: marginTopServicio = 0; 
             }
@@ -134,8 +134,8 @@ export class DocumentoCredencialAgente extends DocumentoPDF {
             funciones.push(cargo? cargo.subpuesto.nombre : '');
             
         }
-        console.log(margenesServicio);
-        console.log(margenesNombre);
+        console.log("margen servicio", margenesServicio);
+        console.log("margen nombre", margenesNombre);
         return {
             agentes: agentes,
             funciones: funciones,
