@@ -136,17 +136,26 @@
         border-radius: 20px;
         background-color: white;
         padding: 5px 10px 5px 10px;
+        /*max-height: 45px;*/
+        max-width: 134px;
+
+        /*display: inline-flex;
+        justify-content: center;
+        align-items: center;*/
+
+        text-align: center;
+        overflow: hidden;
         display: inline-block;
-        max-height: 45px;
 
     }
 
-    h3 {
-        margin:0px;
-        align-content: center;     
+    h3 {/**/
+        margin-top: 0px;
+        margin-bottom: 0px;
+        text-align: center;     
         font-size: 9px; 
         overflow: hidden;
-        max-height: 45px;
+        /*max-height: 45px;*/
         text-transform: uppercase;
 
         word-break: break-word;
