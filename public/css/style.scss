@@ -92,6 +92,8 @@
         flex-direction: column;
         justify-content: center; 
         align-items: center;    
+
+        text-align: center;
     }
 
    
@@ -101,11 +103,7 @@
         justify-content: center;   
     }
 
-     .contFuncion {
-        display: flex;
-        justify-content: center; 
-        margin-top: 0.6em;  
-    }
+     
 
     .nombre {
         max-width: 134px;
@@ -133,37 +131,27 @@
     }
 
     .funcion {
+         margin-top: 0.6em;  
         border-radius: 20px;
         background-color: white;
-        padding: 5px 10px 5px 10px;
-        /*max-height: 45px;*/
+        padding: 5px 10px;
+        display: inline-block;
         max-width: 134px;
 
-        /*display: inline-flex;
-        justify-content: center;
-        align-items: center;*/
-
         text-align: center;
-        overflow: hidden;
-        display: inline-block;
 
     }
 
-    h3 {/**/
-        margin-top: 0px;
-        margin-bottom: 0px;
-        text-align: center;     
-        font-size: 9px; 
-        overflow: hidden;
-        /*max-height: 45px;*/
+    h3 {
+        margin: 0;
+        font-size: 9px;
         text-transform: uppercase;
 
-        word-break: break-word;
-        overflow-wrap: break-word;
+        line-height: 1.1;
+        max-height: calc(1.1em * 3); /* hasta 3 líneas */
+        overflow: hidden;
 
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 3;
+        word-break: break-word;
 
     }
 
