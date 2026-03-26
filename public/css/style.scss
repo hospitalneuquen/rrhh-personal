@@ -111,7 +111,7 @@
         overflow: hidden;
         text-align: center;
     }
-    h2, h3, h5 {
+    h2, h5 {
         line-height: 1.1 !important;
         text-align: center;
       
@@ -135,7 +135,7 @@
         border-radius: 20px;
         background-color: white;
         padding: 5px 10px;
-        display: inline-block;
+        display: inline-flex;
         max-width: 134px;
 
         text-align: center;
@@ -147,11 +147,12 @@
         font-size: 9px;
         text-transform: uppercase;
 
-        line-height: 1.1;
+        line-height: 1.2 !important;
         max-height: calc(1.1em * 3); /* hasta 3 líneas */
         overflow: hidden;
 
         word-break: break-word;
+        display: inline-block;
 
     }
 
