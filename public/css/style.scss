@@ -103,8 +103,6 @@
         justify-content: center;   
     }
 
-     
-
     .nombre {
         max-width: 134px;
         max-height: 69px;
@@ -131,14 +129,19 @@
     }
 
     .funcion {
-         margin-top: 0.6em;  
+        margin-top: 0.6em;
+        margin-left: auto;
+        margin-right: auto;  
         border-radius: 20px;
         background-color: white;
         padding: 5px 10px;
-        display: inline-flex;
+
+        display: flex;
+        width: fit-content;
         max-width: 134px;
 
-        text-align: center;
+        justify-content: center;
+        align-items: center;
 
     }
 
