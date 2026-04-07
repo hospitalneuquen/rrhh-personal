@@ -26,7 +26,6 @@ export const multerUploader = multer({ storage: storage });
  * @returns 
  */
 export async function uploadFile(req, res, next) {
-    console.log("uploadFile");
     try {
         const file = req.file;
         const extension = file.originalname.split('.').pop();
@@ -56,7 +55,6 @@ export async function uploadFile(req, res, next) {
  * @returns
  */
 export async function downloadFile(req, res, next) {
-     console.log("downloadFile");
     try {
         const id = req.params.id; // id es el id del filedescriptor
         const fd = await _findFileDescriptorBy(id);
@@ -163,7 +161,6 @@ export async function getFiles(req, res, next){
 }
 
 export async function readFile(req, res, next){
-    console.log("readFile");
     try {
         const id = req.params.id;
         if (!id || (id && !Types.ObjectId.isValid(id))) return next(404);

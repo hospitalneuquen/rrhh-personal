@@ -764,7 +764,6 @@ function _validateAgenteAttributes(agente): String[] {
  * @param agente obj a determinar su existencia
  */
 async function _findAgente(agente): Promise<any> {
-    console.log("findAgente");
     const attrFaltantes = AgenteController._validateAgenteAttributes(agente);
     if (attrFaltantes.length > 0) {
         throw new Error(
@@ -842,7 +841,6 @@ async function _saveImage(imagen, agenteID, migracion?) {
 }
 
 async function uploadFilesAgente(req, res, next) {
-    console.log("uploadFilesAgente");
     try {
         const id = req.params.id;
         if (!id || (id && !Types.ObjectId.isValid(id))) { return next(404); }

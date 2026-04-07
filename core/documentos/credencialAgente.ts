@@ -17,7 +17,6 @@ export class DocumentoCredencialAgente extends DocumentoPDF {
     }
 
     async getContextData(){
-        console.log("entrar en getCOntextData credencialAgente");
         const token = this.request.token;
         // Recuperamos los parametros de busqueda aplicados
         let params = aqp(this.request.query, {
@@ -52,22 +51,15 @@ export class DocumentoCredencialAgente extends DocumentoPDF {
 
         const agenteFotoModel = makeFs();
         for (const agente of agentes) {
-            console.log("entrar en for agente");
-            //calculo para margen-top dinamico de nombre
+            //Cálculo para margin-top dinámico de nombre y servicio. Para nombre se basa en líneas de nombre y función.
             const servicio = `${agente.situacionLaboral.cargo.servicio.nombre || ''}`;
             const lineasServicio = this.estimarLineas(servicio,34);
-            console.log(servicio);
-            console.log("servicio", lineasServicio);
             
             const nombreCompleto = `${agente.nombre || ''} ${agente.apellido || ''}`;
-            console.log(nombreCompleto);
-            const lineasNombre = this.estimarLineas(nombreCompleto,17);//11
-            console.log("nombre",lineasNombre);
+            const lineasNombre = this.estimarLineas(nombreCompleto,17);
             
             const funcion = `${agente.situacionLaboral.cargo.subpuesto.nombre || ''}`;
-            const lineasFuncion = this.estimarLineas(funcion, 22);//20
-            console.log(funcion);
-            console.log("funcion", lineasFuncion);
+            const lineasFuncion = this.estimarLineas(funcion, 22);
             
             let marginTopNombre = 0;
             let marginTopServicio = 0;
@@ -134,8 +126,7 @@ export class DocumentoCredencialAgente extends DocumentoPDF {
             funciones.push(cargo? cargo.subpuesto.nombre : '');
             
         }
-        console.log("margen servicio", margenesServicio);
-        console.log("margen nombre", margenesNombre);
+
         return {
             agentes: agentes,
             funciones: funciones,
@@ -162,8 +153,6 @@ export class DocumentoCredencialAgente extends DocumentoPDF {
     private estimarLineas(texto: string, caracteresPorLinea:number): number {
   
         if (!texto) return 1;
-        //const caracteresPorLinea = 18; 
-        console.log("long", texto.length);
         return Math.ceil(texto.length / caracteresPorLinea);
     }
 

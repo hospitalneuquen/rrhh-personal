@@ -129,19 +129,16 @@
     }
 
     .funcion {
-        margin-top: 0.6em;
-        margin-left: auto;
-        margin-right: auto;  
+        margin-top: 0.6em; 
         border-radius: 20px;
         background-color: white;
         padding: 5px 10px;
 
-        display: flex;
-        width: fit-content;
+        display: inline-block;
         max-width: 134px;
-
-        justify-content: center;
-        align-items: center;
+        
+        text-align: center;
+      
 
     }
 
@@ -155,7 +152,6 @@
         overflow: hidden;
 
         word-break: break-word;
-        display: inline-block;
 
     }
 
