@@ -45,9 +45,65 @@ export class DocumentoCredencialAgente extends DocumentoPDF {
         let srcImgCredenciales = [];
         let servicios = [];
         let funciones = [];
+        let margenesServicio = [];
+        let margenesNombre = [];
+
+
         const agenteFotoModel = makeFs();
         for (const agente of agentes) {
+            //Cálculo para margin-top dinámico de nombre y servicio. Para nombre se basa en líneas de nombre y función.
+            const servicio = `${agente.situacionLaboral.cargo.servicio.nombre || ''}`;
+            const lineasServicio = this.estimarLineas(servicio,34);
             
+            const nombreCompleto = `${agente.nombre || ''} ${agente.apellido || ''}`;
+            const lineasNombre = this.estimarLineas(nombreCompleto,17);
+            
+            const funcion = `${agente.situacionLaboral.cargo.subpuesto.nombre || ''}`;
+            const lineasFuncion = this.estimarLineas(funcion, 22);
+            
+            let marginTopNombre = 0;
+            let marginTopServicio = 0;
+
+            switch (lineasServicio) {
+                case 1: marginTopServicio = 8; break;
+                case 2: marginTopServicio = 6; break;
+                case 3: marginTopServicio = 0; break;
+                default: marginTopServicio = 0; 
+            }
+            margenesServicio.push(marginTopServicio);
+
+            switch (lineasFuncion) {
+                case 1:
+                    switch (lineasNombre) {
+                        case 1: marginTopNombre = 35.25; break;
+                        case 2: marginTopNombre = 28; break;
+                        case 3: marginTopNombre = 16.35; break;
+                        case 4: marginTopNombre = 8.55; break;
+                        default: marginTopNombre =8.55;
+                    }
+                    break;
+                case 2:  
+                    switch (lineasNombre) {
+                        case 1: marginTopNombre = 32.3; break;
+                        case 2: marginTopNombre = 22.5; break;
+                        case 3: marginTopNombre = 13.4; break;
+                        case 4: marginTopNombre = 3.6;  break;
+                        default: marginTopNombre =3.6;
+                    }
+                    break;
+                case 3:
+                    switch (lineasNombre) {
+                        case 1: marginTopNombre = 29.5; break;
+                        case 2: marginTopNombre = 20.25; break;
+                        case 3: marginTopNombre = 11.6; break;
+                        case 4: marginTopNombre = 1.8; break;
+                        default: marginTopNombre =1.8;                        
+                    }
+                    break;
+            }
+           
+           margenesNombre.push(marginTopNombre);
+        
             // Recuperamos la foto de cada agente
             const files = await agenteFotoModel.find({ 'metadata.agenteID': new Types.ObjectId(agente._id) });
             let file:any;
@@ -66,18 +122,21 @@ export class DocumentoCredencialAgente extends DocumentoPDF {
             }
             // Identificamos funcion y servicio de cada agente
             const cargo = agente.situacionLaboral? agente.situacionLaboral.cargo : null;
+            servicios.push(cargo? cargo.servicio.nombre: '');
             funciones.push(cargo? cargo.subpuesto.nombre : '');
-            servicios.push(cargo? cargo.servicio.nombre: '')
             
         }
-        
+
         return {
             agentes: agentes,
             funciones: funciones,
             servicios: servicios,
+            margenesServicio : margenesServicio,
+            margenesNombre : margenesNombre,
             srcImgCredenciales: srcImgCredenciales,
-            srcImgLogoSmall: `${config.app.url}:${config.app.port}/static/images/logo_small.jpeg`
+            srcImgLogoHospital: `${config.app.url}:${config.app.port}/static/images/logoSolo.svg`,
         }
+        
     }
 
 
@@ -90,4 +149,11 @@ export class DocumentoCredencialAgente extends DocumentoPDF {
         const minutes = date.getMinutes();
         return `${day}/${month}/${year} ${hours}:${minutes}`;
     }
+
+    private estimarLineas(texto: string, caracteresPorLinea:number): number {
+  
+        if (!texto) return 1;
+        return Math.ceil(texto.length / caracteresPorLinea);
+    }
+
 }

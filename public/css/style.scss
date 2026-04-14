@@ -1,67 +1,172 @@
-
-.credencial-salto-pagina{
+.credencial-salto-pagina {
     height: 10px;
 }
+
+.container,
+.container * {
+  box-sizing: border-box;
+}
+
+
 .container {
-    margin: 0px 10px 2px 10px;
-    background-color: #0d3c82;
-    width: 255px;
-    color: white;
-    text-transform: uppercase;
-    border-top-right-radius: 25px;
-    border-bottom-left-radius: 25px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    margin: 5px 10px 12px 28px;
+    background-color: white;
+    height: 241px;
+    width: 156px;
+    color: #17428c;
+    border: 1px solid gray;
+    border-radius: 15px;
     overflow: hidden;
-    // border: 1px solid black;
+
     .credencial {
-        padding: 5px 0px 3px 0px;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
     }
 
-    h1 {
-        font-size: 14px;
+    /* ---------- HEADER ---------- */
+
+    .header {
+        height: 50px;
+        padding: 10px;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .colgante {
+        height: 10px;
+    }
+
+    .contServicio {
+        //margin-top: 0.4em;
+        height: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .servicio {
+        max-width: 130px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
     }
 
     h5 {
-        font-size: 9px;
+        font-size: 7px;
+        max-height:22px;
+        overflow: hidden;
+        text-transform: uppercase;
+        word-break: break-word;
+        overflow-wrap: break-word;
+
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+
     }
 
-    .header {
-        margin-top: 5px;
-        padding: 5px 0px;
-        font-size: 10px;
-        text-align: center;
-        background-color: black;
-    }
+    /* ---------- BODY ---------- */
 
     .body {
-        margin: 5px;
-        text-align: left;
-        
+        flex: 1;
+        background-color: #c9e1f6;
+        padding: 10px;
+        overflow: hidden;
+        height: 151px;
+        display: flex;
     }
 
-    .foto {
-        width: 63px;
-        height: 75px;
-        float: left;
-        margin-right: 5px;
-        border: 1px solid black;
+    .contBody{
+        flex: 1;       
+        width: 100%;
+        display: flex;
+        height: 151px;
+        flex-direction: column;
+        justify-content: center; 
+        align-items: center;    
+
+        text-align: center;
     }
-    
-    .servicio {
+
+   
+    .contNombre{
+        width: 100%;
+        display: flex;
+        justify-content: center;   
+    }
+
+    .nombre {
+        max-width: 134px;
+        max-height: 69px;
+        overflow: hidden;
+        text-align: center;
+    }
+    h2, h5 {
+        line-height: 1.1 !important;
+        text-align: center;
+      
+    }
+
+
+    h2 {
+        /*font-size: 17px;*/
         text-transform: capitalize;
+        word-break: break-word;
+        overflow-wrap: break-word;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 4;
+
+        overflow: hidden;
     }
 
-    .break {
-        clear: both;
-        padding-top:10px ;
+    .funcion {
+        margin-top: 0.6em; 
+        border-radius: 20px;
+        background-color: white;
+        padding: 5px 10px;
+
+        display: inline-block;
+        max-width: 134px;
+        
+        text-align: center;
+      
+
     }
 
-    .footer{
-        background-color: black;
-        padding-right: 5px;
-        text-align: right;
+    h3 {
+        margin: 0;
+        font-size: 9px;
+        text-transform: uppercase;
+
+        line-height: 1.2 !important;
+        max-height: calc(1.1em * 3); /* hasta 3 líneas */
+        overflow: hidden;
+
+        word-break: break-word;
+
+    }
+
+    /* ---------- FOOTER ---------- */
+
+    .footer {
+        height: 40px;
+        background-color: #17428c;
+                      
         img {
-            height: 10px;
-        }
+            margin: 10px 17px;
+            height: 18px;    
+        } 
     }
-    
+
+    /*uno*/
+    /*codigo prueba unir commits 2*/
 }
