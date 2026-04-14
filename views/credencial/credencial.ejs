@@ -1,25 +1,35 @@
 <div class="container">
     <div class="credencial">
         <div class="header">
-            <% if (funcion) { %>
-                <%= value(funcion) %>
-            <% } %>
+            <div class="colgante"></div> 
+            <div class="contServicio" style="margin-top:<%= value(margenServicio) %>px %>">
+                <div class="servicio">
+                    <% if (servicio) { %>
+                        <h5><%= value(servicio) %></h5>
+                    <% } %> 
+                </div>
+            </div>
         </div>
         <div class="body">
-            <% if (foto) { %>
-                <img src="<%= foto %>" class="foto" alt="...">
-            <% } %>
-            <% if (agente) { %>
-                <h1><%= value(agente.apellido) %>, <%= value(agente.nombre) %></h1>
-            <% } %>
-            
-            <div class="break"></div>
-            <% if (servicio) { %>
-                <h5 class="servicio"><%= value(servicio) %></h5>
-            <% } %>    
+            <div class="contBody">
+                <div class="contNombre"  style="margin-top:<%= value(margenNombre) %>px %>"> 
+                    <div class="nombre">
+                        <% if (agente) { %>
+                            <h2><%= value(agente.nombre) %> <%= value(agente.apellido) %></h2>
+                        <% } %>
+                    </div>
+                </div>
+
+                <div class="funcion">
+                    <% if (funcion) { %>
+                        <h3><%=value(funcion) %></h3>
+                     <% } %>    
+                </div>
+
+            </div>
         </div>
         <div class="footer">
-            <img src='<%= srcImgLogoSmall %>'>
+            <img src='<%= srcImgLogoHospital %>' alt="logoHospital">
         </div>
     </div>
 </div>
