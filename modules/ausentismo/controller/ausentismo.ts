@@ -65,7 +65,7 @@ export async function getAusentismo(req, res, next) {
 }
 
 
-export async function addAusentismo(req, res, next) { 
+export async function addAusentismo(req, res, next) {
     try {
         const ausentismo = res.locals.ausentismo;
         const controller = res.locals.controller;
@@ -89,17 +89,15 @@ export async function updateAusentismo(req, res, next){
             (articulosEnUso.descuentaDiasLicencia && !articuloNuevo.descuentaDiasLicencia)||
             (!articulosEnUso.descuentaDiasLicencia && articuloNuevo.descuentaDiasLicencia))    
                 return res.status(400).send({ message: "No se puede editar un Articulo por una Licencia" });
-        
         if (!articulosEnUso._id.equals(articuloNuevo._id))
             // Se modifico el articulo. Reemplazmos el ausentismo por uno nuevo
             return res.json(await controller.replaceArticuloAusentismo(ausentismoToUpdate, ausentismoNewValues));
-        
         if (utils.isSameDay(ausentismoToUpdate.fechaDesde, ausentismoNewValues.fechaDesde) &&
             utils.isSameDay(ausentismoToUpdate.fechaHasta, ausentismoNewValues.fechaHasta))
-                // Las fechas se mantienen igual por lo que aplicamos una simple actualizacion
+            // Las fechas se mantienen igual por lo que aplicamos una simple actualizacion
                 return res.json(await controller.simpleUpdateAusentismo(ausentismoToUpdate, ausentismoNewValues));
         
-        
+
         // Las fechas se modificaron. Debemos aplicar una actualizacion completa de las ausencias e indicadores
         return res.json(await controller.fullUpdateAusentismo(ausentismoToUpdate, ausentismoNewValues));
         
@@ -170,7 +168,7 @@ export async function getIndicadoresLicenciaAgente(req, res, next){
  * Determina con precision la fecha desde, hasta, total de dias y las fechas
  * de los dias de ausencia, de acuerdo al tipo de dia indicado por el articulo
  * (dias corridos o habiles).
- * @param agente  
+ * @param agente
  * @param articulo Determina si se deben calcular dias corridos o habiles
  * @param desde 
  * @param hasta Opcional. Si se indica este valor se intenta determinar el total de dias
@@ -275,151 +273,158 @@ export function generarAusencias(agente, articulo, diasAusencia){
 
 
 /**
-     * Valida la correctitud de un ausentismo definido en relacion a los indicadores
-     * calculados. Actualmente se valida:
-     *             - Que el ausentismo no se solape con otras ausencias previas
-     *             - Que los indicadores no excedan los dias disponibles de licencia
-     *             - Que existan indicadores para el caso de las licencias 
-     * @param ausentismo 
-     * @param indicadores 
-     * @param ausToUpdate Opcional. Requerido en la actualizacion de un ausentismo
-     */
+ * Valida la correctitud de un ausentismo definido en relacion a los indicadores
+ * calculados. Actualmente se valida:
+ *             - Que el ausentismo no se solape con otras ausencias previas
+ *             - Que los indicadores no excedan los dias disponibles de licencia
+ *             - Que existan indicadores para el caso de las licencias
+ * @param ausentismo
+ * @param indicadores
+ * @param ausToUpdate Opcional. Requerido en la actualizacion de un ausentismo
+ */
     export async function validateAusentismo(ausentismo, indicadores, ausToUpdate?){
-        let warnings = [];
-        warnings = warnings.concat(this.checkDiasLicencia(ausentismo, indicadores));
-        warnings = warnings.concat(utils.formatWarningsIndicadores(await checkMaxDiasDisponibles(indicadores)));
-        warnings = warnings.concat(utils.formatWarningsSuperposicion(await checkSolapamientoPeriodos(ausentismo.agente, ausentismo.articulo, ausentismo.fechaDesde, ausentismo.fechaHasta, ausToUpdate)));
-        return warnings;
-    }
+    let warnings = [];
+    warnings = warnings.concat(this.checkDiasLicencia(ausentismo, indicadores));
+    warnings = warnings.concat(utils.formatWarningsIndicadores(await checkMaxDiasDisponibles(indicadores, ausentismo, ausToUpdate)));
+    warnings = warnings.concat(utils.formatWarningsSuperposicion(await checkSolapamientoPeriodos(ausentismo.agente, ausentismo.articulo, ausentismo.fechaDesde, ausentismo.fechaHasta, ausToUpdate)));
+    return warnings;
+}
 
-    /**
-     * Idem validateAusentismo. Realiza algunas validaciones similares pero
-     * utiles solo cuando se sugieren los dias de ausencia. 
-     * No utilizar ni al momento de cargar o editar licencias.
-     * @param ausNewValues 
-     * @param ausentismoCalculado 
-     * @param indicadores 
-     * @param ausToUpdate 
-     */
+/**
+ * Idem validateAusentismo. Realiza algunas validaciones similares pero
+ * utiles solo cuando se sugieren los dias de ausencia.
+ * No utilizar ni al momento de cargar o editar licencias.
+ * @param ausNewValues
+ * @param ausentismoCalculado
+ * @param indicadores
+ * @param ausToUpdate
+ */
     export async function validateAusentismoSugerencia(ausNewValues, ausentismoCalculado, indicadores, ausToUpdate?){
-        let warnings = [];
-        warnings = warnings.concat(utils.formatWarningsIndicadores(await this.checkIndicadoresSugerencia(indicadores, ausNewValues.fechaDesde)));
-        warnings = warnings.concat(utils.formatWarningsSuperposicion(await this.checkSolapamientoPeriodos(ausNewValues.agente, ausNewValues.articulo, ausentismoCalculado.desde, ausentismoCalculado.hasta, ausToUpdate)));
-        return warnings;
-    }
+    let warnings = [];
+    warnings = warnings.concat(utils.formatWarningsIndicadores(await this.checkIndicadoresSugerencia(indicadores, ausNewValues.fechaDesde)));
+    warnings = warnings.concat(utils.formatWarningsSuperposicion(await this.checkSolapamientoPeriodos(ausNewValues.agente, ausNewValues.articulo, ausentismoCalculado.desde, ausentismoCalculado.hasta, ausToUpdate)));
+    return warnings;
+}
 
 
-    /**
-     * Utilidad para copiar los valores de un objeto ausentismo a otro objeto
-     * @param ausToUpdate 
-     * @param ausNewValues 
-     */
+/**
+ * Utilidad para copiar los valores de un objeto ausentismo a otro objeto
+ * @param ausToUpdate
+ * @param ausNewValues
+ */
     export  function applyChanges(ausToUpdate, ausNewValues){
-        ausToUpdate.fechaDesde = ausNewValues.fechaDesde;
-        ausToUpdate.fechaHasta = ausNewValues.fechaHasta;
-        ausToUpdate.cantidadDias = ausNewValues.cantidadDias;
-        ausToUpdate.ausencias = ausNewValues.ausencias;
-        ausToUpdate.observacion = ausNewValues.observacion;
-        ausToUpdate.adicional = ausNewValues.adicional;
-        ausToUpdate.extra = ausNewValues.extra;
-        // adjuntos: Array,
-        // certificado: CertificadoSchema,
-        // ausencias: [AusenciaSchema]
-        return ausToUpdate;
-    }
+    ausToUpdate.fechaDesde = ausNewValues.fechaDesde;
+    ausToUpdate.fechaHasta = ausNewValues.fechaHasta;
+    ausToUpdate.cantidadDias = ausNewValues.cantidadDias;
+    ausToUpdate.ausencias = ausNewValues.ausencias;
+    ausToUpdate.observacion = ausNewValues.observacion;
+    ausToUpdate.adicional = ausNewValues.adicional;
+    ausToUpdate.extra = ausNewValues.extra;
+    // adjuntos: Array,
+    // certificado: CertificadoSchema,
+    // ausencias: [AusenciaSchema]
+    return ausToUpdate;
+}
 
     export function checkDiasLicencia(ausentismo, indicadores){
-        let warnings = [];
+    let warnings = [];
         if (ausentismo.articulo.descuentaDiasLicencia &&
             (!indicadores || !indicadores.length)){
             warnings = warnings.concat(`No se encontró información sobre días disponibles! Consulte con el Administrador del Sistema.`);
-        }
-        return warnings;
     }
+    return warnings;
+}
 
-    export function checkMaxDiasDisponibles(indicadores){
-        let indicadoresConProblemas = [];
-        for (const indicador of indicadores){
-            let intervaloConProblemas:any;
-            for (const intervalo of indicador.intervalos){
-                if ( intervalo.totales ){
-                    const diasDisponibles = intervalo.totales - intervalo.ejecutadas;
-                    const restoDiasDisponibles = diasDisponibles - intervalo.asignadas;
-                    if( intervalo.totales && restoDiasDisponibles < 0) {
-                        intervaloConProblemas = intervalo;
-                        break;
-                    }
+export function checkMaxDiasDisponibles(indicadores, ausentismo, ausentismoToUpdate?) {
+    let indicadoresConProblemas = [];
+    for (const indicador of indicadores) {
+        let intervaloConProblemas: any;
+        for (const intervalo of indicador.intervalos) {
+            if (intervalo.totales) {
+                let diasDisponibles = 0;
+                if ( ausentismoToUpdate !== undefined && ausentismo.articulo._id == ausentismoToUpdate.articulo._id) {
+                    diasDisponibles = intervalo.totales - intervalo.ejecutadas + ausentismoToUpdate.cantidadDias;
+                } else {
+                    diasDisponibles = intervalo.totales - intervalo.ejecutadas;
                 }
                 
-            }
-            if (intervaloConProblemas){
-                indicador.intervalos = [intervaloConProblemas];
-                indicadoresConProblemas.push(indicador)
-            }     
-        }
-        return indicadoresConProblemas;
-    }
+                const restoDiasDisponibles = diasDisponibles - ausentismo.cantidadDias;
 
-    /**
-     * Busca ausencias previas existentes en un periodo determinado para un agente.
-     * El parametro ausentismo se utiliza unicamente en el caso que se este en modo 
-     * edicion, para evitar controlar con el mismo ausentismo que se esta editando
-     * @param agente 
-     * @param articulo 
-     * @param desde 
-     * @param hasta 
-     * @param ausentismo Opcional. Unicamente necesario en modo edicion
-     */
+                if (intervalo.totales && restoDiasDisponibles < 0) {
+                    intervaloConProblemas = intervalo;
+                    break;
+                }
+            }
+                
+        }
+            if (intervaloConProblemas){
+            indicador.intervalos = [intervaloConProblemas];
+            indicadoresConProblemas.push(indicador)
+        }
+    }
+    return indicadoresConProblemas;
+}
+
+/**
+ * Busca ausencias previas existentes en un periodo determinado para un agente.
+ * El parametro ausentismo se utiliza unicamente en el caso que se este en modo
+ * edicion, para evitar controlar con el mismo ausentismo que se esta editando
+ * @param agente
+ * @param articulo
+ * @param desde
+ * @param hasta
+ * @param ausentismo Opcional. Unicamente necesario en modo edicion
+ */
     export async function checkSolapamientoPeriodos(agente, articulo, desde, hasta, ausentismo?){
-        let ausentismos = await AusenciaPeriodo.find({
+    let ausentismos = await AusenciaPeriodo.find({
             'agente._id': agente._id,
             'ausencias': {
-                $elemMatch: {
-                    fecha: {
-                        $gte: desde,
+            $elemMatch: {
+                fecha: {
+                    $gte: desde,
                         $lte: hasta
                     }
                 }
             }
-        });
+    });
         if (ausentismo){
             ausentismos = ausentismos.filter(au => !au._id.equals(ausentismo._id));
-        }
-        return ausentismos;
     }
-    
-    /**
-     * Identifica y retorna indicadores que hayan alcanzado el numero maximo de ausencias
-     * permitida por periodo. El listado de indicadores con problemas solo incluira el
-     * intervalo del periodo que presenta problemas de acuerdo a la fecha de interes.
-     * Por ejemplo si un indicador indica que para el mes de abril no hay mas ausencias
-     * disponibles y la fecha de interes (fecha inicio del ausentismo) es precisamente
-     * un dia de abril, entonces este indicador se retornara como parte del control. 
-     * Si no hay problemas detectados se retorna un array vacio.
-     * @param indicadores Listado total de indicadores para un articulo en particular
-     * @param fechaInteres Es la fecha desde del ausentismo a cargar
-     * @param ausentismo Opcional.
-     */
+    return ausentismos;
+}
+
+/**
+ * Identifica y retorna indicadores que hayan alcanzado el numero maximo de ausencias
+ * permitida por periodo. El listado de indicadores con problemas solo incluira el
+ * intervalo del periodo que presenta problemas de acuerdo a la fecha de interes.
+ * Por ejemplo si un indicador indica que para el mes de abril no hay mas ausencias
+ * disponibles y la fecha de interes (fecha inicio del ausentismo) es precisamente
+ * un dia de abril, entonces este indicador se retornara como parte del control.
+ * Si no hay problemas detectados se retorna un array vacio.
+ * @param indicadores Listado total de indicadores para un articulo en particular
+ * @param fechaInteres Es la fecha desde del ausentismo a cargar
+ * @param ausentismo Opcional.
+ */
     export function checkIndicadoresSugerencia(indicadores, fechaInteres, ausentismo?){
-        let indicadoresConProblemas = [];
+    let indicadoresConProblemas = [];
         for (const indicador of indicadores){
             let intervaloConProblemas:any;
             for (const intervalo of indicador.intervalos){
                 if (intervalo.totales && (!intervalo.hasta || (intervalo.hasta >= fechaInteres))) {
                     const diasDisponibles = intervalo.totales - intervalo.ejecutadas;
                     if( diasDisponibles < 0) {
-                        intervaloConProblemas = intervalo;
-                    }
-                    break;
+                    intervaloConProblemas = intervalo;
                 }
-                // if (!intervalo.limiteAusencias || !intervalo.hasta || (intervalo.hasta >= fechaInteres)) {
-                //     const diasDisponibles = intervalo.totales - intervalo.ejecutadas;
-                //     if( diasDisponibles < 0) {
-                //         intervaloConProblemas = intervalo;
-                //     }
-                //     break;
-                // }
+                break;
             }
+            // if (!intervalo.limiteAusencias || !intervalo.hasta || (intervalo.hasta >= fechaInteres)) {
+            //     const diasDisponibles = intervalo.totales - intervalo.ejecutadas;
+            //     if( diasDisponibles < 0) {
+            //         intervaloConProblemas = intervalo;
+            //     }
+            //     break;
+            // }
+        }
             if (intervaloConProblemas){
                 indicador.intervalos = [intervaloConProblemas];
                 indicadoresConProblemas.push(indicador)
